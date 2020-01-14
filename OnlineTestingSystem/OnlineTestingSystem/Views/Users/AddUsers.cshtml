@@ -1,0 +1,32 @@
+﻿@model OnlineTestingSystem.Models.Users
+@{
+    ViewBag.Title = "AddUsers";
+}
+
+<h2>AddUsers</h2>
+<div>
+    @using (Html.BeginForm("AddUsers", "Users", FormMethod.Post))
+    {
+        <div class="form-group">
+
+
+
+            <span class="input-group-addon">
+                @Html.LabelFor(u => u.UserFirstName)
+            </span>
+
+            @Html.TextBoxFor(u => u.UserFirstName, new { @class = "form-control", placeholder = "Enter your First Name" })
+
+        </div>
+
+        @Html.ValidationMessageFor(u => u.UserFirstName)
+ @Html.TextBoxFor(u => u.UserLastName, new { @class = "form-control", placeholder = "Enter Your Last Name" })
+        @Html.TextBoxFor(u => u.UserEmail, new { @class = "form-control", placeholder = "Enter your Email" })
+        @Html.ValidationMessageFor(u => u.UserEmail)
+        @Html.PasswordFor(u => u.UserPassword,new { @class = "form-control", placeholder = "Enter your Password" })
+        @Html.ValidationMessageFor(u => u.UserPassword)
+        <input type="submit" />
+    }
+    Name:@ViewBag.firstName
+</div>
+

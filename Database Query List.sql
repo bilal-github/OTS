@@ -12,7 +12,8 @@ GO
 
 
 CREATE TABLE Users(
-	UserID int NOT NULL PRIMARY KEY,
+	UserID int identity,
+	constraint Users_UserID_PK PRIMARY KEY (UserID),
 	UserPassword varchar(8) NOT NULL,
 	UserFirstName varchar(30) NOT NULL,
 	UserLastName varchar(30) NOT NULL,
@@ -21,14 +22,14 @@ CREATE TABLE Users(
 GO
 
 CREATE TABLE Disciplines(
-	DisciplineID int NOT NULL,
+	DisciplineID int identity,
 	constraint DisciplineID_PK PRIMARY KEY (DisciplineID),
 	DisciplineName varchar(50) NOT NULL
 );
 GO
 
 CREATE TABLE DisciplineDetail(
-	DetailID int NOT NULL,
+	DetailID int identity,
 	constraint DetailID_PK PRIMARY KEY (DetailID),
 	UserID int,
 	constraint DisciplineDetail_UserID_FK FOREIGN KEY (UserID)
@@ -40,7 +41,7 @@ CREATE TABLE DisciplineDetail(
 GO
 
 CREATE TABLE Test(
-	TestID int NOT NULL,
+	TestID int identity,
 	constraint TestID_PK PRIMARY KEY (TestID), 
 	DisciplineID int,
 	UserID int, 
@@ -52,6 +53,8 @@ CREATE TABLE Test(
 GO
 
 CREATE TABLE Results(
+	SerialNo int identity,
+	constraint Results_SerialNo_PK PRIMARY KEY (SerialNo),
 	UserID int,
 	constraint Results_UserID_FK FOREIGN KEY (UserID)
 		References Users(UserID),
@@ -63,14 +66,14 @@ CREATE TABLE Results(
 GO
 
 CREATE TABLE Questions(
-	QuestionID int NOT NULL,
+	QuestionID int identity,
 	constraint QuestionID_PK PRIMARY KEY (QuestionID),
 	QuestionDescription varchar(150) NOT NULL
 );
 GO
 
 CREATE TABLE Answers(
-	SerialNo int NOT NULL,
+	SerialNo int identity,
 	constraint SerialNo_PK PRIMARY KEY (SerialNo),
 	DisciplineID int,
 	constraint Answers_DisciplineID_FK FOREIGN KEY (DisciplineID)
