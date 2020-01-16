@@ -15,6 +15,8 @@ namespace OnlineTestingSystem
 
             // register all your components with the container here
             container.RegisterType<IUsers, UsersModel>();
+            container.RegisterType<IAdmin, AdminModel>();
+            container.RegisterType<IDiscipline, DisciplineModel>();
             // it is NOT necessary to register your controllers
             
             // e.g. container.RegisterType<ITestService, TestService>();

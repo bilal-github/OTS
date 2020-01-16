@@ -18,7 +18,7 @@
 
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home",null, new { @class = "nav-link active" })</li>
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link active" })</li>
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("SignUP", "AddUsers", "Users", null, new { @class = "nav-link" })</li>
@@ -33,20 +33,17 @@
     <div class="container-fluid">
         <div class="row">
             @*Left Panel*@
-            <div class="col-3">
+            <div class="col-4">
 
             </div>
             @*Middle Panel*@
-            <div class="col-6">
+            <div class="col-8">
                 <div class="container body-content">
                     @RenderBody()
 
                 </div>
             </div>
-            @*Right Panel*@
-            <div class="col-3">
 
-            </div>
         </div>
     </div>
 
@@ -63,3 +60,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+

@@ -135,12 +135,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DisciplineController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IAdmin.cs" />
+    <Compile Include="Interfaces\IDiscipline.cs" />
     <Compile Include="Interfaces\IUsers.cs" />
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\Discipline.cs" />
+    <Compile Include="Models\DisciplineModel.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -285,9 +293,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Admin\AddAdmin.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Discipline\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
