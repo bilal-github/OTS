@@ -12,5 +12,7 @@ namespace OnlineTestingSystem.Models
 
         [Required(ErrorMessage = "Discipilne Name is Required")]
         public string DisciplineName { get; set; }
+
+
     }
 }

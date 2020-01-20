@@ -31,5 +31,39 @@ namespace OnlineTestingSystem.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public ActionResult AdminLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdminLogin(Admin admin)
+        {
+            //Admin newAdmin = admin;
+            if (ModelState.IsValid)
+            {
+                Admin validAdmin = _iadmin.AuthenticateAdmin(admin);
+                if(admin.AdminName == validAdmin.AdminName)
+                {
+                    return RedirectToAction("AdminPanel", "Admin");
+
+                }
+                else
+                {
+                    ViewBag.message = "Invalid User";
+                    
+                }
+            }
+            return View();
+
+        }
+
+        [HttpGet]
+        public ActionResult AdminPanel()
+        {
+            return View();
+        }
     }
 }

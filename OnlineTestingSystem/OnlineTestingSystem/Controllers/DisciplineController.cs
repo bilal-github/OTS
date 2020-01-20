@@ -27,7 +27,26 @@ namespace OnlineTestingSystem.Controllers
             if (ModelState.IsValid)
             {
                 Discipline newDiscipline = _idiscipline.AddDiscipline(discipline);
+                ViewBag.message = "Discipline Added Successfully";
 
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult EditDiscipline()
+        {
+            var disciplinesList = _idiscipline.disciplines();
+            return View(disciplinesList);
+        }
+
+        [HttpPost]
+        public ActionResult EditDiscipline(Discipline updateDiscipline)
+        {
+            if (ModelState.IsValid)
+            {
+                Discipline editDiscipine = _idiscipline.EditDiscipline(updateDiscipline);
+                ViewBag.message = "Discipline Updated Successfully";
             }
             return View();
         }

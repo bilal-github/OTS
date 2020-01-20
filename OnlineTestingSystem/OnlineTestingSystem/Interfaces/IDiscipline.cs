@@ -12,5 +12,7 @@ namespace OnlineTestingSystem.Interfaces
         Discipline AddDiscipline(Discipline discipline);
         Discipline EditDiscipline(Discipline discipline);
 
+        IEnumerable<Discipline> disciplines();
+
     }
 }

@@ -11,5 +11,7 @@ namespace OnlineTestingSystem.Interfaces
     {
         Admin AddAdmin(Admin admin);
         Admin EditAdmin(Admin admin);
+
+        Admin AuthenticateAdmin(Admin admin);
     }
 }

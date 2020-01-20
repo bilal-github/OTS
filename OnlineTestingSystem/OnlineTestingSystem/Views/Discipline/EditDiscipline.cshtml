@@ -1,0 +1,25 @@
+﻿@model OnlineTestingSystem.Models.DisciplineModel
+   
+@{
+    ViewBag.Title = "EditDiscipline";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Edit Discipline</h2>
+<h4 style="font-style:oblique; font-weight:lighter;">Complete the registration form below:</h4>
+<br />
+<div class="container">
+    @using (Html.BeginForm("EditDiscipline", "Discipline", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(a => a.DisciplineName, "Discipline Name")
+            @Html.DropDownListFor(a => a.disciplines,"Selected")
+            @Html.TextBoxFor(u => u.DisciplineName, new { @class = "form-control", placeholder = "Enter Discipline Name" })
+            @Html.ValidationMessageFor(u => u.DisciplineName, "", new { @style = "color:red" })
+        </div>
+        <input class="btn btn-primary" type="submit" />
+
+    }
+    @ViewBag.message
+</div>
+

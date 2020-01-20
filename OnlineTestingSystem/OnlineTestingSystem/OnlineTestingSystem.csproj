@@ -295,10 +295,13 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Admin\AddAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\AdminLogin.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
+    <Content Include="Views\Discipline\AddDiscipline.cshtml" />
+    <Content Include="Views\Discipline\EditDiscipline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Discipline\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
