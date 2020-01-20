@@ -90,6 +90,12 @@ CREATE TABLE Answers(
 );
 GO
 
+CREATE TABLE Admin
+(AdminID int IDENTITY PRIMARY KEY,
+AdminName varchar(30) NOT NULL,
+AdminPassword varchar(30) NOT NULL);
+GO
+
 
 
 
