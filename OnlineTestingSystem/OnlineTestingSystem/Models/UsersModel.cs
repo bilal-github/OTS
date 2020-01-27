@@ -30,6 +30,37 @@ namespace OnlineTestingSystem.Models
             }
             return user;
         }
+        public Users AuthenticateUsers(Users user)
+        {
+            int count = 0;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT UserEmail,UserPassword from Users " +
+                    "WHERE UserEmail = @UserEmail AND UserPassword = @UserPassword";
+
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    command.Parameters.AddWithValue("UserEmail", user.UserEmail);
+                    command.Parameters.AddWithValue("userPassword", user.UserPassword);
+
+                    SqlDataReader reader;
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        count++;
+                    }
+                    reader.Close();
+                }
+            }
+            if (count == 0) // for comparison in the controller
+            {
+                return new Users {UserEmail = "", UserPassword = "" };
+            }
+            return user;
+        }
+
+      
 
         public Users DeleteUsers(Users user)
         {

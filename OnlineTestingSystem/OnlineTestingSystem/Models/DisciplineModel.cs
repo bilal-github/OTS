@@ -41,6 +41,7 @@ namespace OnlineTestingSystem.Models
         public IEnumerable<Discipline> disciplines()
         {
             LoadDisciplines();
+            
             return disciplinesList;
             
         }

@@ -137,6 +137,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DisciplineController.cs" />
+    <Compile Include="Controllers\DisciplineDetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -144,10 +145,13 @@
     </Compile>
     <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\IDiscipline.cs" />
+    <Compile Include="Interfaces\IDisciplineDetails.cs" />
     <Compile Include="Interfaces\IUsers.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Discipline.cs" />
+    <Compile Include="Models\DisciplineDetails.cs" />
+    <Compile Include="Models\DisciplineDetailsModel.cs" />
     <Compile Include="Models\DisciplineModel.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\UsersModel.cs" />
@@ -299,9 +303,11 @@
     <Content Include="Views\Admin\AdminPanel.cshtml" />
     <Content Include="Views\Discipline\AddDiscipline.cshtml" />
     <Content Include="Views\Discipline\EditDiscipline.cshtml" />
+    <Content Include="Views\Users\LoginUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DisciplineDetails\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

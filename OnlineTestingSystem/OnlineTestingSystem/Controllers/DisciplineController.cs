@@ -37,6 +37,8 @@ namespace OnlineTestingSystem.Controllers
         public ActionResult EditDiscipline()
         {
             var disciplinesList = _idiscipline.disciplines();
+           //ViewBag.Discipline = disciplinesList;
+            
             return View(disciplinesList);
         }
 
@@ -45,7 +47,7 @@ namespace OnlineTestingSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                Discipline editDiscipine = _idiscipline.EditDiscipline(updateDiscipline);
+                //Discipline editDiscipine = _idiscipline.EditDiscipline(updateDiscipline);
                 ViewBag.message = "Discipline Updated Successfully";
             }
             return View();

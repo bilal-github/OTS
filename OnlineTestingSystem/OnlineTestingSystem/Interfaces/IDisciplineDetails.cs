@@ -7,11 +7,9 @@ using OnlineTestingSystem.Models;
 
 namespace OnlineTestingSystem.Interfaces
 {
-    public interface IUsers
+    public interface IDisciplineDetails
     {
-        Users AddUsers(Users user);
-        Users UpdateUsers(Users user);
-        Users DeleteUsers(Users user);
-        Users AuthenticateUsers(Users user);
+        void AddDetail(Users user, Discipline discipline);
+        
     }
 }
