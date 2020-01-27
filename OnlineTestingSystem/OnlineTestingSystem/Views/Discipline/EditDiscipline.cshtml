@@ -1,6 +1,6 @@
-﻿@*@model OnlineTestingSystem.Models.Discipline*@
-@model List<Discipline>
-@using OnlineTestingSystem.Models
+﻿@model OnlineTestingSystem.Models.Discipline
+@*@model List<Discipline>*@
+@*@using OnlineTestingSystem.Models*@
 
 @{
     ViewBag.Title = "EditDiscipline";
@@ -12,27 +12,34 @@
 <br />
 <div class="container">
 
-    @*@using (Html.BeginForm("EditDiscipline", "Discipline", FormMethod.Post))
-    {*@
-    <form action="EditDiscipline" asp-action="" asp->
-        <div class=" form-group">
-            <label for="OldDisciplineName">Old Discipline</label>
+    @using (Html.BeginForm("EditDiscipline", "Discipline", FormMethod.Post))
+    {
 
-            <select class="form-control" id="OldDisciplineName">
+    <div class=" form-group">
+        <label for="OldDisciplineName">Old Discipline</label>
 
-                @foreach (var discipline in Model)
-                {
-                    <option> @discipline.DisciplineName</option>
-                }
-            </select>
-        </div>
+        @*<select class="form-control" id="OldDisciplineName">
+
+            @foreach (var discipline in Model)
+            {
+                <option> @discipline.DisciplineName</option>
+            }
+        </select>*@
+        @Html.DropDownListFor(t => t.DisciplineName, ViewBag.Discipline, "Select Discipline")
+        @Html.DropDownListFor(t => Model.DisciplineName, ViewBag.Discipline, "Select Discipline", new { @class = "form-control" })
+
+        @Html.DropDownListFor(m => m.DisciplineName, ViewBag.listOfDisciplines, "Choose...", new { @class = "form-control dropdown" })
+
+
+
+    </div>
         <div class="form-group">
             <label for="NewDisciplineName">New Discipline Name</label> <br />
             <input id="NewDisciplineName" />
         </div>
         <input class="btn btn-primary" type="submit" />
-    </form>
-    @*}*@
+
+    }
     @ViewBag.message
 
 </div>

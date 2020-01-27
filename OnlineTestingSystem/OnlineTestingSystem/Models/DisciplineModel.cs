@@ -11,6 +11,7 @@ namespace OnlineTestingSystem.Models
     public class DisciplineModel : IDiscipline
     {
         private List<Discipline> disciplinesList = new List<Discipline>();
+        private List<string> disciplineList = new List<string>();
         //public List<Discipline> disciplinesList { get; set; }
 
         string connectionString = ConfigurationManager.ConnectionStrings["OTSConnection"].ConnectionString;
@@ -46,13 +47,13 @@ namespace OnlineTestingSystem.Models
             
         }
 
-        public List<Discipline> LoadDisciplines()
+        public List<string> LoadDisciplines()
         {            
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT DisciplineID,DisciplineName from Disciplines";
+                    string query = "SELECT DisciplineName from Disciplines";
 
                     using (SqlCommand command = new SqlCommand(query, conn))
                     {
@@ -62,7 +63,8 @@ namespace OnlineTestingSystem.Models
                         reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            disciplinesList.Add(new Discipline { DisciplineID = reader.GetInt32(0), DisciplineName = reader.GetString(1) });
+                            // disciplinesList.Add(new Discipline { DisciplineID = reader.GetInt32(0), DisciplineName = reader.GetString(1) });
+                            disciplineList.Add(reader[0].ToString());
                         }
                         reader.Close();
                     }
@@ -73,7 +75,7 @@ namespace OnlineTestingSystem.Models
                 throw ex;
             }
 
-            return disciplinesList;
+            return disciplineList;
         }
 
         public Discipline EditDiscipline(Discipline discipline)

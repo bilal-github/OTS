@@ -36,8 +36,8 @@ namespace OnlineTestingSystem.Controllers
         [HttpGet]
         public ActionResult EditDiscipline()
         {
-            var disciplinesList = _idiscipline.disciplines();
-           //ViewBag.Discipline = disciplinesList;
+            var disciplinesList = _idiscipline.LoadDisciplines();
+           ViewBag.listOfDisciplines = (List<string>)disciplinesList;
             
             return View(disciplinesList);
         }
