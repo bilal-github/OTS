@@ -1,6 +1,7 @@
 ﻿@model OnlineTestingSystem.Models.Discipline
 @*@model List<Discipline>*@
 @*@using OnlineTestingSystem.Models*@
+@*@using System.Web.Mvc;*@
 
 @{
     ViewBag.Title = "EditDiscipline";
@@ -13,32 +14,14 @@
 <div class="container">
 
     @using (Html.BeginForm("EditDiscipline", "Discipline", FormMethod.Post))
-    {
-
-    <div class=" form-group">
-        <label for="OldDisciplineName">Old Discipline</label>
-
-        @*<select class="form-control" id="OldDisciplineName">
-
-            @foreach (var discipline in Model)
-            {
-                <option> @discipline.DisciplineName</option>
-            }
-        </select>*@
-        @Html.DropDownListFor(t => t.DisciplineName, ViewBag.Discipline, "Select Discipline")
-        @Html.DropDownListFor(t => Model.DisciplineName, ViewBag.Discipline, "Select Discipline", new { @class = "form-control" })
-
-        @Html.DropDownListFor(m => m.DisciplineName, ViewBag.listOfDisciplines, "Choose...", new { @class = "form-control dropdown" })
-
-
-
-    </div>
+    {       
+        @Html.DropDownListFor(t => t.DisciplineName, new SelectList(ViewBag.listOfDisciplines), "Select Discipline",new { @class = "form-control" })
+  
         <div class="form-group">
             <label for="NewDisciplineName">New Discipline Name</label> <br />
             <input id="NewDisciplineName" />
         </div>
         <input class="btn btn-primary" type="submit" />
-
     }
     @ViewBag.message
 

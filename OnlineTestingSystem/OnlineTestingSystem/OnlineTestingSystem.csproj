@@ -139,6 +139,7 @@
     <Compile Include="Controllers\DisciplineController.cs" />
     <Compile Include="Controllers\DisciplineDetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -146,6 +147,8 @@
     <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\IDiscipline.cs" />
     <Compile Include="Interfaces\IDisciplineDetails.cs" />
+    <Compile Include="Interfaces\IQuestion.cs" />
+    <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Interfaces\IUsers.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AdminModel.cs" />
@@ -153,6 +156,10 @@
     <Compile Include="Models\DisciplineDetails.cs" />
     <Compile Include="Models\DisciplineDetailsModel.cs" />
     <Compile Include="Models\DisciplineModel.cs" />
+    <Compile Include="Models\QuestionAnswer.cs" />
+    <Compile Include="Models\QuestionAnswerModel.cs" />
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -304,6 +311,7 @@
     <Content Include="Views\Discipline\AddDiscipline.cshtml" />
     <Content Include="Views\Discipline\EditDiscipline.cshtml" />
     <Content Include="Views\Users\LoginUsers.cshtml" />
+    <Content Include="Views\Question\AddQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

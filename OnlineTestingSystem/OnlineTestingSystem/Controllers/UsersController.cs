@@ -41,22 +41,27 @@ namespace OnlineTestingSystem.Controllers
         [HttpPost]
         public ViewResult LoginUsers(Users user)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+
+    //        var errors = ModelState
+    //.Where(x => x.Value.Errors.Count > 0)
+    //.Select(x => new { x.Key, x.Value.Errors })
+    //.ToArray();
+            Users validUser = _iusers.AuthenticateUsers(user);
+            if (user.UserEmail == validUser.UserEmail)
             {
-                Users validUser = _iusers.AuthenticateUsers(user);
-                if (user.UserEmail == validUser.UserEmail)
-                {
-                    //redirect to welcome page 
-                    // return RedirectToAction("AdminPanel", "Admin");
-                    ViewBag.message = "Valid User";
+                //redirect to welcome page 
+                // return RedirectToAction("AdminPanel", "Admin");
+                ViewBag.message = "Valid User";
 
-                }
-                else
-                {
-                    ViewBag.message = "Invalid User";
-
-                }
             }
+            else
+            {
+                ViewBag.message = "Invalid User";
+
+            }
+            //}
             return View();
         }
 

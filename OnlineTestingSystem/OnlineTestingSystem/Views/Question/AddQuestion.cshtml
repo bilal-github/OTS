@@ -1,0 +1,25 @@
+﻿@model OnlineTestingSystem.Models.QuestionAnswer
+@{
+    ViewBag.Title = "AddQuestion";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Add a question</h2>
+<h4 style="font-style:oblique; font-weight:lighter;">Complete the registration form below:</h4>
+<br />
+<div class="container">
+    @using (Html.BeginForm("AddQuestion", "Question", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(a => a.QuestionDescription, "Question Description")
+            @Html.TextBoxFor(u => u.QuestionDescription, new { @class = "form-control", placeholder = "Enter Question Description" })
+            @Html.ValidationMessageFor(u => u.QuestionDescription, "", new { @style = "color:red" })
+        </div>
+        <input class="btn btn-primary" type="submit" />
+
+    }
+    @ViewBag.message
+
+
+</div>
+
