@@ -12,6 +12,12 @@ namespace OnlineTestingSystem.Models
     public class AdminModel : IAdmin
     {
         string connectionString = ConfigurationManager.ConnectionStrings["OTSConnection"].ConnectionString;
+        
+        /// <summary>
+        /// Add an Admin
+        /// </summary>
+        /// <param name="admin"></param>
+        /// <returns></returns>
         public Admin AddAdmin(Admin admin)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))

@@ -13,5 +13,7 @@ namespace OnlineTestingSystem.Interfaces
         Users UpdateUsers(Users user);
         Users DeleteUsers(Users user);
         Users AuthenticateUsers(Users user);
+        bool HasRegistrations(int userID);
+        List<Discipline> LoadDisciplinesByID(int UserID);
     }
 }

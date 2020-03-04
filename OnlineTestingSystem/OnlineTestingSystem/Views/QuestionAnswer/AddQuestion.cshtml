@@ -1,0 +1,55 @@
+﻿@model OnlineTestingSystem.Models.Discipline_QuestionAnswer
+@{
+    ViewBag.Title = "AddQuestion";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Add a question</h2>
+<h4 style="font-style:oblique; font-weight:lighter;">Complete the registration form below:</h4>
+<br />
+<div class="container">
+    @using (Html.BeginForm("AddQuestion", "QuestionAnswer", FormMethod.Post))
+    {
+    <div class="form-group">
+        @* Question Table *@
+        @Html.LabelFor(a => a.questionAnswer.QuestionDescription, "Question Description")
+        @Html.TextBoxFor(u => u.questionAnswer.QuestionDescription, new { @class = "form-control", placeholder = "Enter Question Description" })
+        @Html.ValidationMessageFor(u => u.questionAnswer.QuestionDescription, "", new { @style = "color:red" })
+
+        @* Answer Table *@
+        @Html.LabelFor(a => a.questionAnswer.Category, "Category (Optional)")
+        @Html.TextBoxFor(u => u.questionAnswer.Category, new { @class = "form-control", placeholder = "Enter A Category" })
+        @Html.ValidationMessageFor(u => u.questionAnswer.Category, "", new { @style = "color:red" })
+
+        @Html.LabelFor(a => a.discipline.DisciplineName, "Discipline Name")
+         @Html.DropDownListFor(t => t.discipline.DisciplineName, new SelectList(ViewBag.listOfDisciplines), "Select Discipline", new { @class = "form-control"})
+
+        @Html.LabelFor(a => a.questionAnswer.Answer1, "Answer 1")
+        @Html.TextBoxFor(u => u.questionAnswer.Answer1, new { @class = "form-control", placeholder = "Answer 1" })
+        @Html.ValidationMessageFor(u => u.questionAnswer.Answer1, "", new { @style = "color:red" })
+
+        @Html.LabelFor(a => a.questionAnswer.Answer2, "Answer 2")
+        @Html.TextBoxFor(u => u.questionAnswer.Answer2, new { @class = "form-control", placeholder = "Answer 2" })
+        @Html.ValidationMessageFor(u => u.questionAnswer.Answer2, "", new { @style = "color:red" })
+
+        @Html.LabelFor(a => a.questionAnswer.Answer3, "Answer 3")
+        @Html.TextBoxFor(u => u.questionAnswer.Answer3, new { @class = "form-control", placeholder = "Answer 3" })
+        @Html.ValidationMessageFor(u => u.questionAnswer.Answer3, "", new { @style = "color:red" })
+
+        @Html.LabelFor(a => a.questionAnswer.Answer4, "Answer 4")
+        @Html.TextBoxFor(u => u.questionAnswer.Answer4, new { @class = "form-control", placeholder = "Answer 4" })
+        @Html.ValidationMessageFor(u => u.questionAnswer.Answer4, "", new { @style = "color:red" })
+
+        @Html.LabelFor(a => a.questionAnswer.CorrectAnswer, "Correct Answer")
+        @Html.TextBoxFor(u => u.questionAnswer.CorrectAnswer, new { @class = "form-control", placeholder = "Correct Answer" })
+        @Html.ValidationMessageFor(u => u.questionAnswer.CorrectAnswer, "", new { @style = "color:red" })
+
+    </div>
+        <input class="btn btn-primary" type="submit" />
+
+    }
+    @ViewBag.message
+
+
+</div>
+

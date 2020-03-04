@@ -1,0 +1,32 @@
+﻿@model OnlineTestingSystem.Models.QuestionAnswer
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="float-right">
+    Logged in as: @ViewBag.Name
+</div>
+<h2>Test for Discipline: @ViewBag.DisciplineName</h2>
+<h4 style="font-style:oblique; font-weight:lighter;">Answer the question and click next</h4>
+<br />
+<div>
+    @using (Html.BeginForm("Test", "Test", FormMethod.Post))
+    {
+    <div class="form-group">
+        @*@Html.RadioButtonFor(model => model, 3, new { id = "rbMaintenance" })*@
+
+        <div class="row">@Html.LabelFor(a => a.QuestionID, "Question ") @ViewBag.count : @ViewBag.Question </div>
+        <div class="row">@Html.RadioButtonFor(r => r.selectAnswer, 1, new { id = @ViewBag.Answer1 }) @ViewBag.Answer1</div>
+        <div class="row">@Html.RadioButtonFor(r => r.selectAnswer, 2) @ViewBag.Answer2</div>
+        <div class="row">@Html.RadioButtonFor(r => r.selectAnswer, 3) @ViewBag.Answer3</div>
+        <div class="row">@Html.RadioButtonFor(r => r.selectAnswer, 4) @ViewBag.Answer4</div>
+
+        <input class="btn btn-primary" type="submit" value="Next" />
+        @ViewBag.result
+    </div>
+    }
+</div>
+
+
+
+

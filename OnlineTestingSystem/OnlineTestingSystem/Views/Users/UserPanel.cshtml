@@ -1,0 +1,33 @@
+﻿@model OnlineTestingSystem.Models.User_Discipline
+@{
+    ViewBag.Title = "UserPanel";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="float-right">
+    Logged in as: @ViewBag.session
+</div>
+<h2>User Panel</h2>
+@ViewBag.disciplinesList
+<h4 style="font-style:oblique; font-weight:lighter;">Choose a Discipline to start</h4>
+<br />
+<div class="container">
+   
+        @using (Html.BeginForm("UserPanel", "Users", FormMethod.Post))
+        {
+            <div class="form-group">
+
+                @Html.LabelFor(a => a, "Discipline Name")
+                @Html.DropDownListFor(t => t.discipline.DisciplineName , new SelectList(ViewBag.disciplinesList,"DisciplineID","DisciplineName"), "Select Discipline", new { @class = "form-control" })
+
+                @*@Html.LabelFor(a => a.questionAnswer.Answer1, "Answer 1")
+                @Html.TextBoxFor(u => u.questionAnswer.Answer1, new { @class = "form-control", placeholder = "Answer 1" })
+                @Html.ValidationMessageFor(u => u.questionAnswer.Answer1, "", new { @style = "color:red" })*@
+
+
+            </div>
+            @ViewBag.a
+            <input class="btn btn-primary" type="submit" />
+
+        }
+    @ViewBag.message
+
