@@ -96,6 +96,12 @@ AdminName varchar(30) NOT NULL,
 AdminPassword varchar(30) NOT NULL);
 GO
 
+CREATE TABLE Temp
+(UserEmail varchar(50) NOT NULL,
+DisciplineID int NOT NULL,
+QuestionID int NOT NULL);
+GO
+
 
 
 
