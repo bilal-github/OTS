@@ -30,59 +30,77 @@ namespace OnlineTestingSystem.Controllers
         {
             ViewBag.Name = Session["UserFirstName"];
             ViewBag.DisciplineName = Session["DisciplineName"];
-
+            int UserID = Convert.ToInt32(Session["UserID"]);
             int DisciplineID = _iquestionAnswer.RetrieveDisciplineID(Session["DisciplineName"].ToString());
-            QuestionsList = _iquestionAnswer.GetQuestionIDs(DisciplineID); // [1,15]
-            int randomNumber = random.Next(QuestionsList.Count);
-            int QuestionID = (int)QuestionsList[randomNumber];
-            Session["CurrentQuestion"] = QuestionID;
-           // QuestionsList.Remove(QuestionID);
-            var question = _iquestionAnswer.RetrieveQuestion(QuestionID);
-            var answer = _iquestionAnswer.RetrieveAnswer(QuestionID, DisciplineID);
+            int TestID = _iquestionAnswer.RetrieveTestID(UserID, DisciplineID);
+            Session["TestID"] = TestID;
+            Session["DisciplineID"] = DisciplineID;
+            QuestionsList = _iquestionAnswer.GetQuestionIDs(UserID, DisciplineID); // list of questions in the diciplineID
+            if (QuestionsList.Count > 0)
+            {
 
-            ViewBag.Question = question.QuestionDescription;
-            ViewBag.Answer1 = answer.Answer1;
-            ViewBag.Answer2 = answer.Answer2;
-            ViewBag.Answer3 = answer.Answer3;
-            ViewBag.Answer4 = answer.Answer4;
-            Session["CorrectAnswer"] = answer.CorrectAnswer;
-            return View();
+                int randomNumber = random.Next(QuestionsList.Count);
+                int QuestionID = (int)QuestionsList[randomNumber];
+                _iquestionAnswer.AddQuestionToTemp(UserID, DisciplineID, QuestionID);
+                Session["CurrentDisciplineID"] = DisciplineID;
+                Session["CurrentQuestion"] = QuestionID;
+                var question = _iquestionAnswer.RetrieveQuestion(QuestionID);
+                var answer = _iquestionAnswer.RetrieveAnswer(QuestionID, DisciplineID);
+                ViewBag.Question = question.QuestionDescription;
+                ViewBag.Answer1 = answer.Answer1;
+                ViewBag.Answer2 = answer.Answer2;
+                ViewBag.Answer3 = answer.Answer3;
+                ViewBag.Answer4 = answer.Answer4;
+                Session["CorrectAnswer"] = answer.CorrectAnswer;
+                return View();
+            }
+            return RedirectToAction("Results","Results");
         }
 
         [HttpPost]
         public ActionResult Test(QuestionAnswer questionAnswer)
         {
-            //if (Request.HttpMethod == "POST")
-            //{
+            int UserID = Convert.ToInt32(Session["UserID"]);
+            int DisciplineID = Convert.ToInt32(Session["CurrentDisciplineID"]);
+            int QuestionID = Convert.ToInt32(Session["CurrentQuestion"]);
+
             var correctAnswer = Session["CorrectAnswer"].ToString();
             if (questionAnswer.selectAnswer == correctAnswer)
             {
+                _iquestionAnswer.IsCorrect("true",UserID,DisciplineID,QuestionID);
                 ViewBag.result = "Correct Answer";
             }
             else
             {
+                _iquestionAnswer.IsCorrect("false", UserID, DisciplineID, QuestionID);
                 ViewBag.result = "Incorrect Answer";
             }
-            int DisciplineID = _iquestionAnswer.RetrieveDisciplineID(Session["DisciplineName"].ToString());
-            QuestionsList = _iquestionAnswer.GetQuestionIDs(DisciplineID); // [2,5,6,7,5,2]
-            QuestionsList.Remove(Convert.ToInt32(Session["CurrentQuestion"]));
-            int randomNumber = random.Next(QuestionsList.Count);
-            int QuestionID = (int)QuestionsList[randomNumber];
-            Session["CurrentQuestion"] = QuestionID;
-            //Create temp table store question IDs already seen and then remove at session end.
+            
+            QuestionsList = _iquestionAnswer.GetQuestionIDs(UserID, DisciplineID);
+            //if ther are no more questions do this
+            if (QuestionsList.Count > 0)
+            {
+                int randomNumber = random.Next(QuestionsList.Count);
+                QuestionID = (int)QuestionsList[randomNumber];
+                _iquestionAnswer.AddQuestionToTemp(UserID, DisciplineID, QuestionID);
+                Session["CurrentQuestion"] = QuestionID;
+                var question = _iquestionAnswer.RetrieveQuestion(QuestionID);
+                var answer = _iquestionAnswer.RetrieveAnswer(QuestionID, DisciplineID);
 
-            QuestionsList.Remove(QuestionID);
-            var question = _iquestionAnswer.RetrieveQuestion(QuestionID);
-            var answer = _iquestionAnswer.RetrieveAnswer(QuestionID, DisciplineID);
+                ViewBag.Question = question.QuestionDescription;
+                ViewBag.Answer1 = answer.Answer1;
+                ViewBag.Answer2 = answer.Answer2;
+                ViewBag.Answer3 = answer.Answer3;
+                ViewBag.Answer4 = answer.Answer4;
+                Session["CorrectAnswer"] = answer.CorrectAnswer;
+                return View();
+            }
+            return RedirectToAction("Results","Results");
+        }
+        [HttpGet]
+        public ActionResult Results()
+        {
 
-            ViewBag.Question = question.QuestionDescription;
-            ViewBag.Answer1 = answer.Answer1;
-            ViewBag.Answer2 = answer.Answer2;
-            ViewBag.Answer3 = answer.Answer3;
-            ViewBag.Answer4 = answer.Answer4;
-            Session["CorrectAnswer"] = answer.CorrectAnswer;
-
-            //}
             return View();
         }
     }

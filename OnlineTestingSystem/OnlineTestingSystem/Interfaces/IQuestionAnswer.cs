@@ -14,7 +14,10 @@ namespace OnlineTestingSystem.Interfaces
         QuestionAnswer RetrieveAnswer(int QuestionID, int DisciplineID);
         int CountQuestions(int DisciplineID);
         int RetrieveDisciplineID(string DisciplineName);
-        List<int> GetQuestionIDs(int disciplineID);
+        List<int> GetQuestionIDs(int UserID,int disciplineID);
+        void AddQuestionToTemp(int UserID,int DisciplineID, int questionID);
+        void IsCorrect(string isCorrect, int UserID, int DisciplineID, int questionID);
+        int RetrieveTestID(int userID, int disciplineID);
         //QuestionAnswer checkAnswer(int QuestionID, )
     }
 }

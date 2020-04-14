@@ -16,7 +16,7 @@ namespace OnlineTestingSystem
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Admin", action = "AdminLogin", id = UrlParameter.Optional }
+                defaults: new { controller = "Users", action = "LoginUsers", id = UrlParameter.Optional }
             );
 
         }

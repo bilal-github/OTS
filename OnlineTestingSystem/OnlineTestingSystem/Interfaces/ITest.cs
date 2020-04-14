@@ -10,5 +10,6 @@ namespace OnlineTestingSystem.Interfaces
     public interface ITest
     {
         Test AddTest(Test test);
+        
     }
 }

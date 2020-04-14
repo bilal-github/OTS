@@ -11,6 +11,8 @@ namespace OnlineTestingSystem.Models
     public class QuestionAnswerModel : IQuestionAnswer
     {
         string connectionString = ConfigurationManager.ConnectionStrings["OTSConnection"].ConnectionString;
+        List<int> QuestionsList;
+
 
         public QuestionAnswer AddQuestionAnswer(QuestionAnswer questionAnswer)
         {
@@ -62,6 +64,7 @@ namespace OnlineTestingSystem.Models
 
         public QuestionAnswer RetrieveQuestion(int QuestionID)
         {
+
             QuestionAnswer question = new QuestionAnswer();
 
             using(SqlConnection connection = new SqlConnection(connectionString))
@@ -79,6 +82,9 @@ namespace OnlineTestingSystem.Models
                         question.QuestionID = (int)reader[0];
                         question.QuestionDescription = reader[1].ToString();
                     }
+
+                    //QuestionsList.Add(question.QuestionID);
+
                 }
             }
             return question;
@@ -143,15 +149,17 @@ namespace OnlineTestingSystem.Models
             return id;
         }
 
-        public List<int> GetQuestionIDs(int disciplineID)
+        public List<int> GetQuestionIDs(int UserID,int disciplineID)
         {
             List<int> questions = new List<int>();
-            string selectQuery = "Select QuestionID from answers where DisciplineID = @DisciplineID";
-            using(SqlConnection connection = new SqlConnection(connectionString))
+            string selectQuery = "Select a.QuestionID from Answers a " +
+                                 "Except(select QuestionID from Temp where DisciplineID = @DisciplineID and UserID = @UserID)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using(SqlCommand command = new SqlCommand(selectQuery, connection))
                 {
                     command.Parameters.AddWithValue("DisciplineID", disciplineID);
+                    command.Parameters.AddWithValue("UserID", UserID);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
@@ -161,6 +169,57 @@ namespace OnlineTestingSystem.Models
                 }
             }
             return questions;
+        }
+
+        public void AddQuestionToTemp(int UserID,int DisciplineID, int questionID)
+        {
+            string insertQuery = "INSERT INTO Temp(UserID,DisciplineID,QuestionID) Values(@UserID,@DisciplineID, @QuestionID)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using(SqlCommand command = new SqlCommand(insertQuery, connection))
+                {
+                    command.Parameters.AddWithValue("UserID", UserID);
+                    command.Parameters.AddWithValue("DisciplineID", DisciplineID);
+                    command.Parameters.AddWithValue("QuestionID", questionID);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+        public void IsCorrect(string isCorrect, int UserID, int DisciplineID, int questionID)
+        {
+            string updateQuery = "Update Temp Set IsCorrect = @isCorrect where  UserID=@UserID and DisciplineID = @DisciplineID and QuestionID = @QuestionID";
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using(SqlCommand command = new SqlCommand(updateQuery, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("isCorrect", isCorrect);
+                    command.Parameters.AddWithValue("UserID", UserID);
+                    command.Parameters.AddWithValue("DisciplineID", DisciplineID);
+                    command.Parameters.AddWithValue("QuestionID", questionID);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public int RetrieveTestID(int userID, int disciplineID)
+        {
+            int id = 0;
+            string selectQuery = "Select TestID from Test where DisciplineID = @DisciplineID and UserID = @UserID";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("DisciplineID", disciplineID);
+                    command.Parameters.AddWithValue("UserID", userID);
+                    id = (int)command.ExecuteScalar();
+                }
+            }
+            return id;
         }
     }
 }

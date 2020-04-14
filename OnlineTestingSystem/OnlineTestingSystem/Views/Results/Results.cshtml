@@ -1,0 +1,62 @@
+﻿@model OnlineTestingSystem.Models.Result
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Results</h2>
+@*<h2>User Login</h2>*@
+@*<h4 style="font-style:oblique; font-weight:lighter;">Results:</h4>*@
+<br />
+<div class="container">
+    @using (Html.BeginForm("Results", "Results", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <th style="padding:5px 5px">Statistics</th>
+                <th style="padding:5px 5px">Result</th>
+            </tr>
+            <tr>
+                <td class="form-group" style="padding:5px 5px">
+                    @Html.LabelFor(a => a.TotalQuestions, "Total Questions Answered")
+                </td>
+                <td class="form-group" style="padding:5px 5px">
+                    @Html.DisplayFor(u => u.TotalQuestions)
+                    @* @Html.ValidationMessageFor(u => u.UserEmail, "", new { @style = "color:red" })*@
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group" style="padding:5px 5px">
+                    @Html.LabelFor(a => a.CorrectQuestions, "Correct")
+                </td>
+                <td class="form-group" style="padding:5px 5px">
+                    @Html.DisplayFor(u => u.CorrectQuestions)
+                    @* @Html.ValidationMessageFor(u => u.UserEmail, "", new { @style = "color:red" })*@
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group" style="padding:5px 5px">
+                    @Html.LabelFor(a => a.WrongQuestions, "Incorrect")
+                </td>
+                <td class="form-group" style="padding:5px 5px">
+                    @Html.DisplayFor(u => u.WrongQuestions)
+                    @* @Html.ValidationMessageFor(u => u.UserEmail, "", new { @style = "color:red" })*@
+                </td>
+            </tr>
+            <tr>
+                <td class="form-group" style="padding:5px 5px">
+                    @Html.LabelFor(a => a.Score, "Score")
+                </td>
+                <td class="form-group" style="padding:5px 5px">
+                    @Html.DisplayFor(u => u.Score)
+                    @* @Html.ValidationMessageFor(u => u.UserEmail, "", new { @style = "color:red" })*@
+                </td>
+            </tr>
+        </table>
+        <input class="btn btn-primary" type="submit" />
+    }
+    @ViewBag.message
+
+</div>
+
+
