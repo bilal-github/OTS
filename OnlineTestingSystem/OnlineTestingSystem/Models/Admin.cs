@@ -13,7 +13,6 @@ namespace OnlineTestingSystem.Models
                
         [Required(ErrorMessage = "Admin Name is Required")]
         public string AdminName { get; set; }
-	    public	int AdminPhone;
 
 
         [Required(ErrorMessage = "Password is Required")]
